@@ -39,9 +39,7 @@ class JSONRequestHandler (BaseHTTPRequestHandler):
         self.send_header("Content-type", "application/json")
         # send a blank line to end headers:
         self.wfile.write("\r\n")
-
-        print(FILE_PREFIX)
-        print(self.path)
+        print(FILE_PREFIX + "/" + self.path[1:] + ".json")
         try:
             output = open(FILE_PREFIX + "/" + self.path[1:] + ".json", 'r').read()
         except Exception:
