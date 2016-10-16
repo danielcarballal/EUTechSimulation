@@ -57,12 +57,9 @@
         border-bottom: 1px solid;
         padding-bottom: 20px;
       }
-      h6 {
-        font-family: Serif;
-        font-weight: bold;
-      }
       .row.match-my-cols {
         overflow: hidden; 
+        padding-top: 20px;
       }
       .row.match-my-cols [class*="col-"]{
           margin-bottom: -99999px;
@@ -80,7 +77,30 @@
       #myProgress{
         background-color: red;
       }
-      #myPr
+      .subtitle {
+        font-family: telegrafico, gothic, Serif;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+      }
+
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+      }
+
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+
+      tr:nth-child(odd){
+        background-color: #4286f4;
+      }
   	</style>
   </head>
   <body style="background-color : #f0f0fe">
@@ -90,7 +110,7 @@
   			<img src="http://www.europeanhorizons.org/wp-content/uploads/2015/04/LOGO_BIG-1030x326.png" style="max-width:100%">
   			</div>
   			<div class="col-sm-6 col-sm-offset-1">
-  				<h3 style="font-weight : bold"> Welcome to the European Horizons Simulation </h3>
+  				<h3 style="font-family: Serif" align="center"> Welcome to the European Horizons Simulation </h3>
   			</div> 
   			<div class="col-sm-1 col-sm-offset-2">
   				<img src="http://identitystandards.illinois.edu/assets/images/i_mark_bold.png" style="max-width:100%">
@@ -100,7 +120,7 @@
         <div class="col-md-3 ltblu">
           <div class="row action">
             <div class="col-md-6">
-              <h6> Action 1 </h6>
+              <h6 class="subtitle"> Action 1 </h6>
               <p> Do this action </p>
             </div>
             <div class="col-md-3 col-md-offset-2">
@@ -113,7 +133,7 @@
           </div> 
           <div class="row action">
             <div class="col-md-6">
-              <h6> Action 2 </h6>
+              <h6 class="subtitle"> Action 2 </h6>
               <p> Do this action </p>
             </div>
             <div class="col-md-3 col-md-offset-2">
@@ -126,7 +146,7 @@
           </div> 
           <div class="row action">
             <div class="col-md-6">
-              <h6> Action 3 </h6>
+              <h6 class="subtitle"> Action 3 </h6>
               <p> Do this action </p>
             </div>
             <div class="col-md-3 col-md-offset-2">
@@ -139,7 +159,7 @@
           </div> 
           <div class="row action">
             <div class="col-md-6">
-              <h6> Action 4 </h6>
+              <h6 class="subtitle"> Action 4 </h6>
               <p> Do this action </p>
             </div>
             <div class="col-md-3 col-md-offset-2">
@@ -152,7 +172,7 @@
           </div> 
           <div class="row action">
             <div class="col-md-6">
-              <h6> Action 5 </h6>
+              <h6 class="subtitle"> Action 5 </h6>
               <p> Do this action </p>
             </div>
             <div class="col-md-3 col-md-offset-2">
@@ -165,7 +185,7 @@
           </div> 
           <div class="row action">
             <div class="col-md-6">
-              <h6> Action 6 </h6>
+              <h6 class="subtitle"> Action 6 </h6>
               <p> Do this action </p>
             </div>
             <div class="col-md-3 col-md-offset-2">
@@ -189,19 +209,19 @@
 
           </div>
           <div class="row" style="padding-bottom: 100px">
-            <div class="col-sm-4 button-cont">
+            <div class="col-sm-4 button-cont" align="center">
               <button type="button" class="btn btn-default" style="width: 75%">Option 1 </button>
             </div>
-            <div class="col-sm-4 button-cont">
+            <div class="col-sm-4 button-cont" align="center">
               <button type="button" class="btn btn-default" style="width: 75%">Option 2 </button>
             </div>
-            <div class="col-sm-4 button-cont">
+            <div class="col-sm-4 button-cont" align="center">
               <button type="button" class="btn btn-default" style="width: 75%">Option 3</button>
             </div>
           </div>
           <div class="row" style="bottom: 20px">
-            <div class="col-sm-12">
-              <button type="button" class="btn btn-success" style="right: 30px"> Next turn </button>
+            <div class="col-sm-12" align="center">
+              <button type="button" class="btn btn-success" > Next turn </button>
             </div>
           </div>
         </div>
@@ -212,7 +232,7 @@
             </div>
           </div>
           <div class="row">
-            <p> Development: </p> 
+            <p class="subtitle"> Development: </p> 
           </div>
           <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -223,6 +243,39 @@
               </div>
             </div>
           </div>
+
+          <div class="row" id="self-info">
+            <!-- Information personal to just this user -->
+            <div class="col-sm-12 table-container">
+              <table style="width: 100%">
+                <caption class="subtitle">
+                  Goals
+                </caption>
+                <tr>
+                  <th> Get bitches  </th>
+                  <th> <div class="glyphicon glyphicon-ok"> </th>
+                </tr>
+                <tr>
+                  <th> Pass exams  </th>
+                  <th> <div class="glyphicon glyphicon-ok"> </th>
+                </tr>
+                <tr>
+                  <th> Sleep  </th>
+                  <th> <div class="glyphicon glyphicon-minus"> </th>
+                </tr>
+                <tr>
+                  <th> Get money  </th>
+                  <th> <div class="glyphicon glyphicon-remove"> </th>
+                </tr>
+
+
+
+
+
+              </table>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
