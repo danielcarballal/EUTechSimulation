@@ -1,7 +1,7 @@
 
 class Change{
 	constructor(name, percent_change){
-		this.name = name;
+		this.type = name;
 		this.percent_change = percent_change;
 	}
 }
@@ -12,17 +12,26 @@ class Simulation{
 		this.us_share = 24000000;
 		this.eu_share = 2000000;
 
+		this.turn = 0;
+
 
 		this.development = .2;
 
 	}
 
+	self.
 
 
 	next_turn(changes) {
-		for (var c in changes){
-			console.log(changes[c["name"]]);
+		for (var i in changes){
+			var change_type = changes[i]['type'];
+			var change_val = changes[i]['percent_change'];
+			self.change_sim(change_type, change_val);
 		}
+		// End of Simulation
+		if (this.turn == 5){return 0;}
+		//Otherwise, continue
+		else{return 1;}
 	}
 }
 
