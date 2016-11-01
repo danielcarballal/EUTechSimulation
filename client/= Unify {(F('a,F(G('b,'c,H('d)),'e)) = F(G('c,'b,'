@@ -1,0 +1,7 @@
+= Unify {(F('a,F(G('b,'c,H('d)),'e)) = F(G('c,'b,'c),F('a,'d))), (H(G('d,F('a,'e),'f)) = H(G('e,'f,F(G('c,H('e),H('d)),'e))))}
+
+= Unify {('a = G('c,'b,'c)) , (F(G('b,'c,H('d)),'e) =  F('a,'d)), (H(G('d,F('a,'e),'f)) = H(G('e,'f,F(G('c,H('e),H('d)),'e))))} by Decompose on (F('a,F(G('b,'c,H('d)),'e)) = F(G('c,'b,'c),F('a,'d)))
+
+--
+
+= Unify {(F(G('b,'c,H('d)),'e) =  F(G('c,'b,'c),'d)), (H(G('d,F(G('c,'b,'c),'e),'f)) = H(G('e,'f,F(G('c,H('e),H('d)),'e))))} o {'a -> G('c,'b,'c)} by Eliminate ('a = G('c,'b,'c))
