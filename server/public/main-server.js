@@ -20,16 +20,23 @@ function create_json(sim){
 }
 
 var http = require("http");
+var connect = require('connect');
+
+console.log('\n\n--- Node Version: ' + process.version + ' ---');
+
+// Set up Connect routing
+var app = connect()
+    .use(connect.static(__dirname + '/public'))
+    .use(function(req, res) {
+        console.log('Could not find handler for: ' + req.url);
+        res.end('Could not find handler for: ' + req.url);
+    })
+    .use(function(err, req, res, next) {
+        console.log('Error trapped by Connect: ' + err.message + ' : ' + err.stack);
+        res.end('Error trapped by Connect: ' + err.message);
+    });
 
 // Start node server listening on specified port -----
-var server = http.createServer(function (req, res) {
- console.log(req);
-});
+http.createServer(app).listen(80);
 
-console.log('HTTP server listening on port 3000');
-
-var s = new Simulation();
-var a = 1;
-while(a === 1){
-	a = s.next_turn();
-}
+console.log('HTTP server listening on port 80');

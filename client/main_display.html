@@ -95,7 +95,7 @@
       }
       #mybar {
         background-color: green;
-        width: 25%;
+        width: 35%;
       }
       #myProgress{
         background-color: red;
@@ -126,8 +126,8 @@
         background-color: #4286f4;
       }
 
-      .hover{
-
+      .status{
+        color: #666377;
       }
   	</style>
   </head>
@@ -293,7 +293,7 @@
             <div class="col-md-10 col-md-offset-1">
               <div id="myProgress">
                 <div id="myBar">
-                  <div id="label">25%</div>
+                  <div id="label">35%</div>
                 </div>
               </div>
             </div>
@@ -307,26 +307,20 @@
                   Goals
                 </caption>
                 <tr>
-                  <th> Get girls  </th>
-                  <th> <div class="glyphicon glyphicon-ok green"> </th>
+                  <th> 50% US sales </th>
+                  <th class="status" id="sales_status"> 63% </th>
+                  <th id="sales_glyph"> <div class="glyphicon glyphicon-ok green"> </th>
                 </tr>
                 <tr>
-                  <th> Pass exams  </th>
-                  <th> <div class="glyphicon glyphicon-ok green"> </th>
+                  <th> 50% Development  </th>
+                  <th class="status" id="dev_status"> 25% </th>
+                  <th id="dev_glyph"> <div class="glyphicon glyphicon-minus red"> </th>
                 </tr>
                 <tr>
-                  <th> Sleep  </th>
-                  <th> <div class="glyphicon glyphicon-minus yellow"> </th>
+                  <th> 50% Opinion  </th>
+                  <th class="status" id="opinion_status"> 46% </th>
+                  <th id="opinion_glyph"> <div class="glyphicon glyphicon-minus red"> </th>
                 </tr>
-                <tr>
-                  <th> Get money  </th>
-                  <th> <div class="glyphicon glyphicon-remove red"> </th>
-                </tr>
-
-
-
-
-
               </table>
             </div>
           </div>
@@ -366,7 +360,7 @@
       var n = 0;
     }
 
-    var exampleSocket = new WebSocket("ws://127.0.0.1:8003", "http");
+    var exampleSocket = new WebSocket("ws://127.0.0.1:3000", "http");
     exampleSocket.onopen = function (event) {
       exampleSocket.send("Here's some text that the server is urgently awaiting!"); 
     };
