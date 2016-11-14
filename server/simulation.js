@@ -103,8 +103,7 @@ function Simulation(){
     }
 }
 
-var s = new Simulation();
-var a = 1;
-while(a === 1){
-	a = s.next_turn();
-}
+phonecatApp.controller('SimAppCont', function SimAppCont($scope) {
+    $scope.s = new Simulation();
+});
+

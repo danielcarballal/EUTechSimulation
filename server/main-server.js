@@ -20,16 +20,23 @@ function create_json(sim){
 }
 
 var http = require("http");
+require("fs");
+var url_parse = require('url');
 
-// Start node server listening on specified port -----
-var server = http.createServer(function (req, res) {
- console.log(req);
-});
+var server = http.createServer(function onRequest (req, res) {
+  var url = req.url;
+  res.writeHeader(200, {"Content-Type": "text/html"}); 
+  var url_parts = url_parse.parse(url, true);
+  var team = url_parts.query.team;
+  var pathname = "/european_home.html";
+  if(url_parts.pathname != "/"){
+  	pathname = url_parts.pathname;
+  }
+  res.write(fs.readFileSync("." + pathname));
+  res.end();
+}).listen(3000);
 
-console.log('HTTP server listening on port 3000');
+server.addListener('connection', function onListen (req,res){
+} );
 
 var s = new Simulation();
-var a = 1;
-while(a === 1){
-	a = s.next_turn();
-}

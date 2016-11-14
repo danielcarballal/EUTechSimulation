@@ -32,7 +32,7 @@
   		</div>
   		<div class="row" style="text-align: center">
   			<div class="col-sm-6 col-sm-offset-3 .text-center">
-  				<h6> Created by Daniel Carballal, University of Illinois Urbana Champaign </h6>
+  				<h6 id="some"> Created by Daniel Carballal, University of Illinois Urbana Champaign </h6>
   			</div>
   		</div>
   		<div class="row">
@@ -59,4 +59,9 @@
   		</div>
   	</div>
   </body>
+  <script>
+    var s = Simulation();
+    $('some').html(s.turn);
+    console.log('Hmmm');
+  </script>
 </html>

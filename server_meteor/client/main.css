@@ -1,0 +1,100 @@
+/* CSS declarations go here */
+body{
+  background-color : #f0f0fe;
+}
+.card {
+  			text-align: center;
+  			border-style: solid;
+  			border-color: blue;
+  			border-width: 2px;
+  			padding: 10px;
+  			height: 40%;
+  			background-color: #ffffe6;
+  		}
+      .ltblu {
+        background-color: #83aff7;
+        padding-top: 15px;
+      }
+      .ltyl {
+        background-color: #4286f4;
+        padding-top: 15px;
+      }
+      .ltyl > div {
+        padding: 15px;
+      }
+      .button-cont {
+        padding-top: 20px;
+        
+      }
+      .yellow {
+        color: yellow;
+      }
+      .red {
+        color: red;
+      }
+      .green {
+        color: green;
+      }
+      .action {
+        border-bottom: 1px solid;
+        padding-right: 15px;
+      }
+      .description {
+        background-color: black;
+      }
+      .description p{
+        color: white;
+      }
+      .container{
+        
+        display: table;
+      }
+
+      .trow {
+        display: table-row;
+      }
+      .tcell {
+        display: table-cell;
+        height: 500px;
+      }
+      #label {
+          text-align: center; /* If you want to center it */
+          line-height: 30px;
+          color: white;
+      }
+      #mybar {
+        background-color: green;
+        width: 35%;
+      }
+      #myProgress{
+        background-color: red;
+      }
+      .subtitle {
+        font-family: telegrafico, gothic, Serif;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+          position: absolute;
+      }
+
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 3px;
+      }
+
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+
+      tr:nth-child(odd){
+        background-color: #4286f4;
+      }
+
+      .status{
+        color: #666377;
+      }
