@@ -1,0 +1,59 @@
+{
+  "action_1": {
+    "title": "Tax breaks for Tech",
+    "description": "As a sign of good faith, we will give tax breaks for both European and American companies willing to employ European software engineers. This will help the tech economy greatly, but hurt our public image",
+    "effects": {
+      "eu_share": ".1",
+      "us_share": ".08",
+      "eu_opinion_shift": "-.05"
+    }
+  },
+  "action_2": {
+    "title": "Enforce minor language software",
+    "description": "It’s easy enough to find any software in English, and most have other languages like French and Spanish. But the EU should ensure that any software is available in minor languages, from Basque to Hungarian. Some software companies will be unhappy to have to comply.",
+    "effects": {
+      "us_share": "-.04",
+      "eu_share": "-.04",
+      "eu_cross_share": "-.04",
+      "eu_opinion_shift": ".02"
+    }
+  },
+  "action_3": {
+    "title": "Praise Silicon Valley",
+    "description": "Silicon Valley is bringing our world into the 21st century, and it is crucial that we let Europe stands behind it in this endeavour.",
+    "effects": {
+      "us_company_opinion_shift": ".02"
+    }
+  },
+  "action_4": {
+    "title": "Criticise Silicon Valley",
+    "description": "Silicon Valley is bringing our world into the 21st century, and it is crucial that we let Europe stands behind it in this endeavour.",
+    "effects": {
+      "us_company_opinion_shift": "-.02"
+    }
+  },
+  "action_5": {
+    "title": {},
+    "description": {},
+    "effects": {}
+  },
+  "action_6": {
+    "title": {},
+    "description": {},
+    "effects": {}
+  },
+  "action_7": {
+    "title": "Praise EU",
+    "description": "Let the people know that the EU is doing a good job.",
+    "effects": {
+      "eu_opinion_shift": ".02"
+    }
+  },
+  "action_8": {
+    "title": "Criticise EU",
+    "description": "The EU is being too regulatory for us to succeed!",
+    "effects": {
+      "eu_opinion_shift": "-.02"
+    }
+  }
+}

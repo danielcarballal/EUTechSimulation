@@ -1,12 +1,5 @@
 <template name="main_display">
-  <head>
-  	<title>European Commision</title>
-  </head>
   <body>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   	<div class="container" style="display: table">
   		<div class="row">
   			<div class="col-sm-2">
@@ -21,141 +14,59 @@
   		</div>
       <div class="row trow" >
         <div class="col-md-3 ltblu tcell">
-          <div class="row action" onmouseover="hover(this)" onmouseout="unhover(this)">
-            <div class="col-md-7" >
-              <h6 class="subtitle"> Action 1 </h6>
-              <p> Do this action </p>
+          {{#each action}}
+          <div class="row action">
+            <div class="col-md-9" >
+              <h6 class="subtitle"> {{title}} </h6>
+              <p style="font-size: 7px"> {{description}} </p>
               <div class="description" style="display: none">
                 <p> Description 1 </p>
                 <p style="font-size: 8px;"> Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. </p>
               </div>
             </div>
-            <div class="col-md-3 col-md-offset-2">
+            <div class="col-md-3">
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" data-toggle="toggle">
+                  <input type="checkbox" data-toggle="toggle" id="action_{{id}}">
                 </label>
               </div>
             </div>
           </div> 
-          <div class="row action" onmouseover="hover(this)" onmouseout="unhover(this)">
-            <div class="col-md-7" >
-              <h6 class="subtitle"> Action 2 </h6>
-              <p> Do this action </p>
-              <div class="description" style="display: none">
-                <p> Description 2 </p>
-                <p style="font-size: 8px;"> Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. </p>
-              </div>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" data-toggle="toggle">
-                </label>
-              </div>
-            </div>
-          </div> 
-          <div class="row action" onmouseover="hover(this)" onmouseout="unhover(this)">
-            <div class="col-md-7">
-              <h6 class="subtitle"> Action 3 </h6>
-              <p> Do this action </p>
-              <div class="description" style="display: none">
-                <p> Description 3 </p>
-                <p style="font-size: 8px;"> Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. </p>
-              </div>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" data-toggle="toggle">
-                </label>
-              </div>
-            </div>
-          </div> 
-          <div class="row action" onmouseover="hover(this)" onmouseout="unhover(this)">
-            <div class="col-md-7" >
-              <h6 class="subtitle"> Action 4 </h6>
-              <p> Do this action </p>
-              <div class="description" style="display: none">
-                <p> Description 4 </p>
-                <p style="font-size: 8px;"> Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. </p>
-              </div>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" data-toggle="toggle">
-                </label>
-              </div>
-            </div>
-          </div> 
-          <div class="row action" onmouseover="hover(this)" onmouseout="unhover(this)">
-            <div class="col-md-7">
-              <h6 class="subtitle"> Action 5 </h6>
-              <p> Do this action </p>
-              <div class="description" style="display: none">
-                <p> Description 5</p>
-                <p style="font-size: 8px;"> Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. </p>
-              </div>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" data-toggle="toggle">
-                </label>
-              </div>
-            </div>
-          </div> 
-          <div class="row action" onmouseover="hover(this)" onmouseout="unhover(this)">
-            <div class="col-md-7" >
-              <h6 class="subtitle"> Action 6 </h6>
-              <p> Do this action </p>
-              <div class="description" style="display: none">
-                <p> Description 6 </p>
-                <p style="font-size: 8px;"> Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. </p>
-              </div>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" data-toggle="toggle">
-                </label>
-              </div>
-            </div>
-          </div>
+          {{/each}} 
           <div class="row">
             <p style="font-size: 14px; font-style: italic; font-family: Verdana"> Scroll over action to see effects </p>
           </div>
         </div>
         <div class="col-md-6 ltyl tcell">
-          <div class="row" style="text-align:center; border-bottom: 5px dashed black;">
+          <div class="row" style="text-align:center;">
             <h2> Issue of the day </h2> 
           </div>
           <div class="row">
             <p> 
 
             </p>
-            <p style="font-style: italic"> Bacon ipsum dolor amet culpa cupidatat aliquip ut anim. Sint deserunt cow salami ad proident ipsum elit bresaola. Kevin elit mollit et t-bone ball tip brisket andouille pancetta voluptate drumstick meatloaf sint fatback short ribs. Eu incididunt eiusmod aliqua strip steak, andouille tenderloin exercitation veniam deserunt pork chop landjaeger meatloaf. </p>
+            <p style="font-style: italic">{{issue.description}} </p>
 
           </div>
-          <div class="row" style="padding-bottom: 100px">
+          <div class="row">
             <div class="col-sm-4 button-cont" align="center">
-              <button type="button" class="btn btn-default" style="width: 75%">Option 1 </button>
+              <button type="button" class="btn btn-default small_text" style="width: 75%">{{issue.options_eu.op_title1.title}} </button>
             </div>
             <div class="col-sm-4 button-cont" align="center">
-              <button type="button" class="btn btn-default" style="width: 75%">Option 2 </button>
+              <button type="button" class="btn btn-default small_text" style="width: 75%">{{issue.options_eu.op_title2.title}} </button>
             </div>
             <div class="col-sm-4 button-cont" align="center">
-              <button type="button" class="btn btn-default" style="width: 75%">Option 3</button>
+              <button type="button" class="btn btn-default small_text" style="width: 75%">{{issue.options_eu.op_title3.title}}</button>
             </div>
           </div>
           <div class="row" style="bottom: 20px">
             <div class="col-sm-12" align="center">
-              <button type="button" class="btn btn-success" > Next turn </button>
+              <button type="button" class="btn btn-success next" > Next turn </button>
             </div>
           </div>
         </div>
         <div class="col-md-3 ltblu tcell">
+          {{turn}}
           <div class="row">
             <div class="col-md-9 col-md-offset-1">
               <div id="piechart" style="width: 100%; height: 30%; border: 1px solid;"></div>

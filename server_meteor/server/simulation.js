@@ -1,17 +1,23 @@
 
 import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
 
-params = new Mongo.Collection('simulation_params');
+/* params = new Mongo.Collection('simulation_params');
 
-function Change(name, percent_change){
-    this.type = name;
-    this.percent_change = percent_change;
+console.log("simulation");
+
+function initialise_params(){
+    params.insert({'domestic_share': 18000000});
+    params.insert({'us_share' : 24000000});
+    params.insert({'eu_cross_share' : 2000000});
+    params.insert({'turn' : 0});
 }
 
 function Simulation(){
     //Check constants
-    params.insert({'domestic_share': 18000000});
+    initialise_params();
 
+    console.log(params.find().fetch());
 
 	this.turn = 0;
 
@@ -111,3 +117,4 @@ function Simulation(){
     }
 }
 
+Simulation(); */

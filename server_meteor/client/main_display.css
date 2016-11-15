@@ -94,3 +94,7 @@
       .status{
         color: #666377;
       }
+
+      .small_text{
+        font-size: 10px;
+      }
