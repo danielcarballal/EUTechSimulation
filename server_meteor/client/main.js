@@ -7,20 +7,31 @@ var simulation_params = new Mongo.Collection("simulation_params");
 var issues = new Mongo.Collection("issues");
 var changes = new Mongo.Collection("changes");
 
-console.log(FlowRouter.getParam('team'));
+var is_eu = false;
 
 Template.main_display.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+
+});
+
+Template.contain.onCreated(function hello(){
+	console.log("contain created");
+});
+
+Template.european_home.onCreated(function hello(){
+	console.log("Euro created")
 });
 
 Template.main_display.helpers({
   counter() {
     return Template.instance().counter.get();
   },
-  'action': function(){
-  	var a = actions.find({"id" : {$lt : 5}} );
-  	return a;
+  'eu_actions': function(){
+  		console.log("attempting eu issues");
+  		return actions.find({"id" : {$lt : 5}} );
+  	},
+  	'us_actions': function(){
+  		console.log("attempting us issues");
+  		return actions.find({"id" : {$gt : 4}} );
   },
   'issue' : function(){
   	var a = issues.findOne({"id" : 1});
@@ -52,12 +63,24 @@ Template.main_display.helpers({
   }, 
   'no' : function() {
   	return "glyphicon-minus red";
-  }, 
-  'is_eu' : function(){
-  	return FlowRouter.getParam('team') != "us";
-  },
-  'is_us' : function(){
-  	return false;
+  }
+});
+
+Meteor.methods({
+    'update_sim' : function(){
+      console.log("DFDSF");
+      if(Meteor.isClient){
+        console.log(simulation_params.findOne({"id" : 21}).turn)
+      if(simulation_params.findOne({"id" : 21}).turn != 1){
+        BlazeLayout.render('contain', {main : 'main_display'});
+      }
+    }
+}}
+);
+
+Template.sim_goals.helpers({
+'is_eu' : function(){
+  	return FlowRouter.getParam('_team') == "eu";
   }
 });
 
@@ -65,9 +88,9 @@ Template.main_display.events({
   'click .next'(event, instance) {
     // increment the counter when button is clicked
     changes = [];
-    console.log(FlowRouter.getParam('team'));
-    if(FlowRouter.getParam('team') != "us"){
+    if(is_eu){
 	    for(var i = 1; i <= 4; i++){
+	 		console.log(i);
 	    	if(document.getElementById("action_" + i).checked){
 	    		var act = actions.findOne({"id" : i}).effects;
 	    		for(var k = 0; k < act.length; k++){
@@ -75,8 +98,10 @@ Template.main_display.events({
 	    		}
 	    	}
 	    }
+	   
 	} else {
 		for(var i = 5; i <= 8; i++){
+			console.log(i);
 	    	if(document.getElementById("action_" + i).checked){
 	    		var act = actions.findOne({"id" : i}).effects;
 	    		for(var k = 0; k < act.length; k++){
@@ -85,20 +110,85 @@ Template.main_display.events({
 	    	}
 	    }
 	}
-    //changes.insert({"eu" : changes});
-    Meteor.call('change_action', changes);
-  }
+     Meteor.call('change_action', is_eu, changes);
+}
 });
 
+Template.european_home.events({
+	'click .us_click'(event, instance){
+		BlazeLayout.render('main_display', {is_eu : false});
+		is_in_main_display = true;
+		set_team();
+	},
+	'click .eu_click'(event, instance){
+		BlazeLayout.render('main_display', {is_eu : true});
+		is_eu = true;
+		is_in_main_display = true;
+		set_team();
+	}
+
+});
+
+var is_in_main_display = false;
 simulation_params.find().observeChanges({
-    added : function(id, object){
-        console.log("added " + id);
+    changed : function(){
+    	console.log("Sim parameters changed");
+    	if(is_in_main_display){
+    		BlazeLayout.render('contain', {main : 'main_display'});
+    	}
     }
 });
 
-FlowRouter.route('/'
+Template.sim_goals.events({
+	'click .jsbtn'(event, instance){
+		BlazeLayout.render('main_display', {is_eu : true});
+	}
 
+});
+
+Template.contain.events({
+	'click .us_click'(event, instance){
+		console.log("US clicked");
+	},
+	'click .eu_click'(event, instance){
+		console.log("EU clicked");
+	}
+
+});
+
+Template.contain.helpers({
+	eu() { return ["team", "eu"] },
+	us() { return ["team", "us"] }
+})
+
+
+//Testing only
+FlowRouter.route('/main_display.html/:_team', {
+	name: 'main_display',
+	action(params){
+		BlazeLayout.render('main_display', {team : FlowRouter.getParam('_team')});
+		is_in_main_display = true;
+	}
+}
 );
+
+//Testing only
+FlowRouter.route('/home', {
+	name: 'european_home',
+	action(){
+		BlazeLayout.render('european_home');
+	}
+});
+
+//Main enterance
+FlowRouter.route('/', {
+	name: 'container',
+	action(){
+		BlazeLayout.render('contain', {main : 'european_home'});
+	}
+});
+
+
 
 //Figure this out
 function google_chart(cross, us, eu){
@@ -132,4 +222,4 @@ function update_chart(){
 		simulation_params.findOne({"id" : 21}).eu_cross_share);
 }
 
-google_chart(4,20,15);
+//google_chart(4,20,15);

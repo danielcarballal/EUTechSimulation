@@ -22,3 +22,6 @@ autopublish@1.0.7             # Publish all data to the clients (for prototyping
 insecure                # Allow all DB writes from clients (for prototyping)
 mizzao:bootstrap-3
 kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+anti:methods

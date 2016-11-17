@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-
+/*
 actions = new Mongo.Collection('actions');
 issues = new Mongo.Collection('issues');
 params = new Mongo.Collection('simulation_params');
@@ -24,20 +24,27 @@ import './simulation.js';
 
 var next_turn = 0;
 var store_changes = [];
+var first_entity = "";
 Meteor.methods({
-    'change_action' : function(changes){
+    'change_action' : function(entity, changes){
+        console.log(entity);
+        console.log(changes);
         if(next_turn == 0){
             console.log("first");
+            first_entity = entity;
             store_changes = changes;
             next_turn++;
-        } else {
+        } else if(entity != first_entity) {
             console.log("second");
             s.next_turn(changes.concat(store_changes));
             next_turn = 0;
             store_changes = [];
+        } else {
+          console.log("Repeat");
         }
     }
-})
+});
+
 function insert_all_issues(){
     issues.insert({
          "id": 1,
@@ -217,6 +224,7 @@ function insert_all_actions() {
     }
 
 function initialise_params(s){
+  console.log("Updating params");
     params.insert({
                     'id' : 21, 
                     'domestic_share': s.domestic_share,
@@ -232,13 +240,10 @@ function initialise_params(s){
                     'us_share_perc' : Math.round(100 * s.us_share_percent())
 
                 });
-    /*
-    params.insert({'us_share' : 24000000});
-    params.insert({'eu_cross_share' : 2000000});
-    params.insert({'turn' : 0});
-    params.insert({'development' : .1});
-    */
-    console.log("params initialised");
+    console.log("Updated params");
+    if(s.turn != 1){
+      Meteor.call("update_sim");
+    }
 }
 
 function Simulation(){
@@ -345,4 +350,4 @@ function Simulation(){
     this.eu_domestic_share_percent = function(){
         return this.domestic_share / this.total_share();
     }
-}
+}*/
