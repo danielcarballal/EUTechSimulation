@@ -6,7 +6,7 @@
   			<img src="http://www.europeanhorizons.org/wp-content/uploads/2015/04/LOGO_BIG-1030x326.png" style="max-width:100%">
   			</div>
   			<div class="col-sm-6 col-sm-offset-1">
-  				<h1 style="font-family: Serif" align="center">European Horizons Simulation </h1>
+  				<h1 style="font-family: Serif" align="center">European Horizons Simulation</h1>
   			</div> 
   			<div class="col-sm-1 col-sm-offset-2">
   				<img src="http://identitystandards.illinois.edu/assets/images/i_mark_bold.png" style="max-width:100%">
@@ -19,10 +19,6 @@
             <div class="col-md-9" >
               <h6 class="subtitle"> {{title}} </h6>
               <p style="font-size: 7px"> {{description}} </p>
-              <div class="description" style="display: none">
-                <p> Description 1 </p>
-                <p style="font-size: 8px;"> Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. </p>
-              </div>
             </div>
             <div class="col-md-3">
               <div class="checkbox">
@@ -78,8 +74,8 @@
           <div class="row">
             <div class="col-md-10 col-md-offset-1">
               <div id="myProgress">
-                <div id="myBar">
-                  <div id="label">35%</div>
+                <div id="myBar" style="width:{{simparams.development}}%; background-color: green;">
+                  <div id="label">{{simparams.development}}%</div>
                 </div>
               </div>
             </div>
@@ -90,24 +86,36 @@
             <div class="col-sm-10 table-container">
               <table style="width: 100%">
                 <caption class="subtitle">
-                  Goals
+                  Goals: Turn {{simparams.turn}}/5
                 </caption>
                 <tr>
+                  {{#if is_eu}}
+                  <th> 50% total EU sales </th>
+                  <th class="status" id="sales_status"> {{simparams.eu_share_perc}}% </th>
+                  <th id="sales_glyph"> <div class="glyphicon {{#if eu_sales_check}} {{ok}} {{else}} {{no}} {{/if}}"></div> </th>
+                  {{else}}
                   <th> 50% US sales </th>
-                  <th class="status" id="sales_status"> 63% </th>
-                  <th id="sales_glyph"> <div class="glyphicon glyphicon-ok green"></div> </th>
+                  <th class="status" id="sales_status"> {{simparams.us_share_perc}}% </th>
+                  <th id="sales_glyph"> <div class="glyphicon {{#if us_sales_check}} {{ok}} {{else}} {{no}} {{/if}}"></div> </th>
+                  {{/if}}
                 </tr>
                 <tr>
                   <th> 50% Development  </th>
-                  <th class="status" id="dev_status"> 25% </th>
-                  <th id="dev_glyph"> <div class="glyphicon glyphicon-minus red"> </div></th>
+                  <th class="status" id="dev_status"> {{simparams.development}}% </th>
+                  <th id="dev_glyph"> <div class="glyphicon {{#if dev_check}} {{ok}} {{else}} {{no}} {{/if}}"> </div></th>
                 </tr>
                 <tr>
                   <th> 50% Opinion  </th>
-                  <th class="status" id="opinion_status"> 46% </th>
-                  <th id="opinion_glyph"> <div class="glyphicon glyphicon-minus red"> </div></th>
+                  <th class="status" id="opinion_status"> {{simparams.eu_opinion}}% </th>
+                  <th id="opinion_glyph"> <div class="glyphicon {{#if eu_opinion_check}} {{ok}} {{else}} {{no}} {{/if}}"> </div></th>
+                </tr>
+                <tr>
+                  <th> 15% Cross-EU sales  </th>
+                  <th class="status" id="opinion_status"> 16% </th>
+                  <th id="opinion_glyph"> <div class="glyphicon {{#if eu_cross_check}} {{ok}} {{else}} {{no}} {{/if}}"> </div></th>
                 </tr>
               </table>
+
             </div>
           </div>
 

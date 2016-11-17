@@ -58,12 +58,13 @@
           line-height: 30px;
           color: white;
       }
-      #mybar {
-        background-color: green;
-        width: 35%;
-      }
+
       #myProgress{
         background-color: red;
+      }
+
+      #myBar{
+        background-color: green;
       }
       .subtitle {
         font-family: telegrafico, gothic, Serif;
