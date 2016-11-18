@@ -14,7 +14,6 @@
   		</div>
       <div class="row trow" >
         <div class="col-md-3 ltblu tcell">
-        {{is_eu}}
         {{#if is_eu}}
           {{#each eu_actions}}
           <div class="row action">
@@ -55,23 +54,25 @@
             <h2> Issue of the day </h2> 
           </div>
           <div class="row">
-            <p> 
-
-            </p>
             <p style="font-style: italic">{{issue.description}} </p>
 
           </div>
+        <form action="#n" name="theForm">
           <div class="row">
             <div class="col-sm-4 button-cont" align="center">
-              <button type="button" class="btn btn-default small_text" style="width: 75%">{{#if is_eu}}{{issue.options_eu.op_title1.title}}{{else}}{{issue.options_us.op_title1.title}}{{/if}} </button>
+              <input type="radio" name="option" class="btn btn-default small_text" value="1">
+              <p>{{#if is_eu}}{{issue.options_eu.op_title1.title}}{{else}}{{issue.options_us.op_title1.title}}{{/if}}</p>
             </div>
             <div class="col-sm-4 button-cont" align="center">
-              <button type="button" class="btn btn-default small_text" style="width: 75%">{{#if is_eu}}{{issue.options_eu.op_title2.title}}{{else}}{{issue.options_us.op_title2.title}}{{/if}} </button>
+              <input type="radio" name="option" class="btn btn-default small_text" value="2">
+              <p>{{#if is_eu}}{{issue.options_eu.op_title2.title}}{{else}}{{issue.options_us.op_title2.title}}{{/if}} </p>
             </div>
             <div class="col-sm-4 button-cont" align="center">
-              <button type="button" class="btn btn-default small_text" style="width: 75%">{{#if is_eu}}{{issue.options_eu.op_title3.title}}{{else}}{{issue.options_us.op_title3.title}}{{/if}}</button>
+              <input type="radio" name="option" class="btn btn-default small_text" value="3">
+              <p>{{#if is_eu}}{{issue.options_eu.op_title3.title}}{{else}}{{issue.options_us.op_title3.title}}{{/if}}</p>
             </div>
           </div>
+        </form>
           <div class="row" style="bottom: 20px">
             <div class="col-sm-12" align="center">
               <button type="button" class="btn btn-success next" > Next turn </button>

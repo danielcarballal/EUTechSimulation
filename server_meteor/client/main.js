@@ -34,7 +34,7 @@ Template.main_display.helpers({
   		return actions.find({"id" : {$gt : 4}} );
   },
   'issue' : function(){
-  	var a = issues.findOne({"id" : 1});
+  	var a = issues.findOne({"id" : simulation_params.findOne({"id" : 21}).turn});
   	return a;
   },
   'simparams' : function(){
@@ -45,6 +45,9 @@ Template.main_display.helpers({
   },
   'eu_opinion_check' : function(){
   	return simulation_params.findOne({"id" : 21}).eu_opinion >= 50;
+  },
+  'us_opinion_check' : function(){
+  	return simulation_params.findOne({"id" : 21}).us_opinion >= 50;
   },
   'eu_sales_check' : function(){
   	return simulation_params.findOne({"id" : 21}).eu_share_perc >= 50;
@@ -66,17 +69,6 @@ Template.main_display.helpers({
   }
 });
 
-Meteor.methods({
-    'update_sim' : function(){
-      console.log("DFDSF");
-      if(Meteor.isClient){
-        console.log(simulation_params.findOne({"id" : 21}).turn)
-      if(simulation_params.findOne({"id" : 21}).turn != 1){
-        BlazeLayout.render('contain', {main : 'main_display'});
-      }
-    }
-}}
-);
 
 Template.sim_goals.helpers({
 'is_eu' : function(){
@@ -98,7 +90,22 @@ Template.main_display.events({
 	    		}
 	    	}
 	    }
-	   
+	    oForm = document.forms[0];
+	    console.log();
+	    var option = [];
+	    var value = oForm.elements["option"].value;
+	    if(value == 1){
+	    	option = issues.findOne({"id" : 1}).options_eu.op_title1.effects;
+	    } else if(value == 2){
+	    	option = issues.findOne({"id" : 1}).options_eu.op_title2.effects;
+	    } else if(value == 3){
+	    	option = issues.findOne({"id" : 1}).options_eu.op_title2.effects;
+	    }
+	    console.log(option);
+
+	    for(var k = 0; k < option.length; k++){
+	    	changes.push(option[k]);
+	    }  
 	} else {
 		for(var i = 5; i <= 8; i++){
 			console.log(i);
@@ -109,8 +116,29 @@ Template.main_display.events({
 	    		}
 	    	}
 	    }
+	    oForm = document.forms[0];
+	    console.log();
+	    var option = [];
+	    var value = oForm.elements["option"].value;
+	    console.log(value);
+	    if(value == 1){
+	    	option = issues.findOne({"id" : 1}).options_us.op_title1.effects;
+	    } else if(value == 2){
+	    	option = issues.findOne({"id" : 1}).options_us.op_title2.effects;
+	    } else if(value == 3){
+	    	option = issues.findOne({"id" : 1}).options_us.op_title2.effects;
+	    }
+	    console.log(option);
+
+	    for(var k = 0; k < option.length; k++){
+	    	changes.push(option[k]);
+	    }  
 	}
-     Meteor.call('change_action', is_eu, changes);
+    
+    $(".btn-group button").click(function () {
+    	$("#buttonvalue").val($(this).text());
+	});
+    Meteor.call('change_action', is_eu, changes);
 }
 });
 
@@ -118,13 +146,11 @@ Template.european_home.events({
 	'click .us_click'(event, instance){
 		BlazeLayout.render('main_display', {is_eu : false});
 		is_in_main_display = true;
-		set_team();
 	},
 	'click .eu_click'(event, instance){
 		BlazeLayout.render('main_display', {is_eu : true});
 		is_eu = true;
 		is_in_main_display = true;
-		set_team();
 	}
 
 });
@@ -132,9 +158,9 @@ Template.european_home.events({
 var is_in_main_display = false;
 simulation_params.find().observeChanges({
     changed : function(){
-    	console.log("Sim parameters changed");
     	if(is_in_main_display){
-    		BlazeLayout.render('contain', {main : 'main_display'});
+    		//BlazeLayout.render('contain', {main : 'main_display'});
+    		BlazeLayout.render('main_display', {is_eu : is_eu});
     	}
     }
 });

@@ -23,10 +23,9 @@ if(Meteor.isServer)
   var next_turn = 0;
   var store_changes = [];
   var first_entity = "";
+
   Meteor.methods({
       'change_action' : function(entity, changes){
-          console.log(entity);
-          console.log(changes);
           if(next_turn == 0){
               console.log("first");
               first_entity = entity;
@@ -58,9 +57,9 @@ if(Meteor.isServer)
               "op_title2": {
                 "title": "Demand Reperations",
                 "effects": [
-                  ["condition", ["eu_opinion", .05],
-                      ["eu_opinion": .07],
-                      ["eu_opinion": -.03] ]
+                  ["condition", ["eu_opinion_shift", .05],
+                      ["eu_opinion_shift": .07],
+                      ["eu_opinion_shift": -.03] ]
                 ]
               },
               "op_title3": {
@@ -71,78 +70,163 @@ if(Meteor.isServer)
               "op_title1": {
                 "title": "Placate EU",
                 "effects": [
-                  ["eu_opinion", .02],
+                  ["eu_opinion_shift", .02],
                   ["eu_development_add_change",.02],
                   ["development_add", .02]
                 ]
               },
               "op_title2": {
                 "title": "Refuse to Pay",
-                "effects": {
-                  "us_share": "-.03",
-                  "eu_opinion": "-.02"
-                }
+                "effects": [
+                  ["us_share", -.03],
+                  ["eu_opinion_shift", -.02]
+                ]
               },
               "op_title3": {
                 "title": "Remove EU HQ",
-                "effects": {
-                  "eu_opinion": "-.05",
-                  "us_company_opinion_shift": "-.06",
-                  "eu_devopment_add_change": ".02",
-                  "development": {}
-                }
+                "effects": [
+                   ["eu_opinion_shift", -.05],
+                   ["us_company_opinion_shift", -.06],
+                   ["eu_devopment_add_change", .02]
+                ]
               }
             }
           }
       );
 
       issues.insert({"id": 2,
-        "description": "The world was shocked when the autonomous region of Western Bohemia voted by popular referendum to form an independent nation. The transition was swift, with both the EU and the newly elected Jan Hus Party taking the hard line. However, one of the largest companies from the new country is Kartenzeichner, a mapping company whose products have been used many self-driving research projects throughout Europe. Kartenzeichner have requested access to the Single Digital Market, arguing that their work is crucial to retaining the relevancy of the European tech sector. The European Commision as well as the general sentiment of the people say that Western Bohemia must negotiate entry into the EU before talking about the future of Kartenzeichner. American maps giants like SudoMap and Zygotic scream that it is unfair to allow Kartenzeichner access to the SDM, but not them.",
+        "description": "The world was shocked when the autonomous region of Western Bohemia voted by popular referendum to form an independent nation. The transition was swift, with the EU and the newly elected Jan Hus Party taking the hard line. However, one of the largest companies from the new country is Kartenzeichner, a mapping company whose products have been used many self-driving research projects throughout Europe. Kartenzeichner have requested access to the Single Digital Market, arguing that their work is crucial to retaining the relevancy of the European tech sector. The European Commision as well as the general sentiment of the people say that Western Bohemia must negotiate entry into the EU before talking about the future of Kartenzeichner. American maps giants like SudoMap and Zygotic scream that it is unfair to allow Kartenzeichner access to the SDM, but not them.",
         "options_eu": {
           "op_title1": {
             "title": "Deny Access",
-            "effects": {
-              "eu_development_add_change": "-.025",
-              "development_add": "-.025",
-              "eu_opinion": ".08",
-              "eu_cross_share": "-.02"
-            }
+            "effects": [
+             ["eu_development_add_change", -.025],
+             ["development_add", -.025],
+             ["eu_opinion_shift",.08],
+             ["eu_cross_share", -.02]
+            ]
           },
           "op_title2": {
             "title": "Allow Access",
-            "effects": {
-              "eu_opinion": "-.1",
-              "eu_cross_share": ".02",
-              "eu_development_share": ".04",
-              "development_add": ".01"
-            }
+            "effects": [
+            [ "eu_opinion_shift", -.1],
+             ["eu_cross_share", .02],
+             ["eu_devopment_add_change", .04],
+             ["development_add", .01]
+            ]
           },
           "op_title3": {
-            "title": "Allow Access to Everybody",
-            "effects": {
-              "eu_development_share": "-.02",
-              "development_add": ".08"
-            }
+            "title": "Allow Global Access",
+            "effects": [
+             ["eu_devopment_add_change", -.02],
+             ["development_add", .08]
+            ]
           }
         },
         "options_us": {
           "op_title1": {
             "title": "Support EU Decision",
-            "effects": {
-              "us_company_opinion_shift": ".02"
-            }
+            "effects": [
+             ["us_company_opinion_shift", .02]
+            ]
           },
           "op_title2": {
-            "title": "Demand Equal Access as Bohemia",
-            "effects": {
-              "condition": "agree",
-              "us_company_opinion_shift": ".1"
-            }
+            "title": "Demand Equal Access",
+            "effects": [
+              ["condition", "agree"],
+              ["us_company_opinion_shift", .1]
+            ]
           },
           "op_title3": {
             "title": "None"
           }
         }});
+
+      issues.insert({"id": 3,
+        "description": "Ever since the release of their revolutionary touch screen phone called “the Zoom Prime” in 2007, smartphone use has exploded in Europe, with some 90% of Europeans owning a smartphone. The phone’s creator, Yarra, has added features allowing friends to share their locations and whereabouts at any time. However, many in the European tech community have expressed doubt about how the information was being used, and last week, an article came out that Yarra had been selling the location information to the tune of billions a year.",
+        "options_eu": {
+          "op_title1": {
+            "title": "Limit Traffic Info",
+            "effects": [
+              ["development_add", -.06],
+              ["eu_devopment_add_changeeu_", .04],
+              ["eu_opinion_shift", .04],
+              ["us_company_opinion_shift", .01]
+            ]
+          },
+          "op_title2": {
+            "title": "Allow Access",
+            "effects": [
+              ["development_add", .02],
+              ["eu_devopment_add_change" , -.02],
+              ["eu_opinion_shift" , -.02]
+            ]
+          },
+          "op_title3": {
+            "title": "Fund Tracking Info",
+            "effects": [
+              ["eu_devopment_add_change", .04],
+              ["development_add", .04],
+              ["eu_cross_share", .02]
+            ]
+          }
+        },
+        "options_us": {
+          "op_title1": {
+            "title": "Stop all tracking programs",
+            "effects": [
+              ["development_add", -.07],
+              ["us_company_opinion_shift", .02],
+              ["us_share", -.05]
+            ]
+          },
+          "op_title2": {
+            "title": "Continue tracking program",
+            "effects": [
+              ["us_company_opinion_shift", -.05],
+              ["us_share", .05]
+            ]
+
+          },
+          "op_title3": {
+            "title": "None"
+          }
+        }});
+
+      issues.insert({"id": 4,
+        "description": "Thank you for playing! I hoped you enjoyed it. How would you describe your experience?",
+        "options_eu": {
+          "op_title1": {
+            "title": "I had fun!",
+            "effects": [ ]
+          },
+          "op_title2": {
+            "title": "I learned something!",
+            "effects": [
+            ]
+          },
+          "op_title3": {
+            "title": "Why did I do this?",
+            "effects": []
+          }
+        },
+        "options_us": {
+          "op_title1": {
+            "title": "I had fun!",
+            "effects": [ ]
+          },
+          "op_title2": {
+            "title": "I learned something!",
+            "effects": [
+            ]
+          },
+          "op_title3": {
+            "title": "Why did I do this?",
+            "effects": []
+          }
+        }
+
+    })
 
       //issues.insert();
       //issues.insert();
@@ -305,7 +389,11 @@ if(Meteor.isServer)
       this.next_turn = function(changes) {
           for (var i in changes){
               if(changes[0] == "condition"){
-                  //Do conditional
+                  if(changes.indexOf(changes[i][1]) == -1){
+                    this.change_sim(changes[i][3][0], changes[i][3][1]);
+                  } else{
+                    this.change_sim(changes[i][2][0], changes[i][2][1]);
+                  }
               }
               else {
                   var change_type = changes[i][0];
@@ -316,8 +404,8 @@ if(Meteor.isServer)
           // End of Simulation
           if (this.turn == 5){return 0;}
 
-          this.us_development += this.development_add * (1. + this.eu_development / 10) * 2 * (1 - this.eu_dev);
-          this.eu_development += this.development_add * (1. + this.us_development / 10) * 2 * this.eu_dev;
+          this.us_development += this.development_add * (1. + this.eu_development / 20) * 2 * (1 - this.eu_dev);
+          this.eu_development += this.development_add * (1. + this.us_development / 20) * 2 * this.eu_dev;
 
           //Will increase as simulation goes on
           var total_growth = this.total_dev() * this.total_share();
