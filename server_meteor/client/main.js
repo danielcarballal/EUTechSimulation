@@ -9,16 +9,19 @@ var changes = new Mongo.Collection("changes");
 
 var is_eu = false;
 
-Template.main_display.onCreated(function helloOnCreated() {
+Template.leaderboard.helpers({
 
-});
-
-Template.contain.onCreated(function hello(){
-	console.log("contain created");
-});
-
-Template.european_home.onCreated(function hello(){
-	console.log("Euro created")
+	//Note the switch: We want last turn from the other team
+	'last_turn_eu': function(){
+		return simulation_params.findOne({"id" : 21})['last_turn_us'];
+	},
+	'last_turn_us': function(){
+		return simulation_params.findOne({"id" : 21})['last_turn_eu'];
+	},
+	'is_eu' : function(){
+		console.log(is_eu);
+		return is_eu;
+	}
 });
 
 Template.main_display.helpers({
@@ -44,18 +47,19 @@ Template.main_display.helpers({
   	return simulation_params.findOne({"id" : 21}).development * 100;
   },
   'eu_opinion_check' : function(){
-  	return simulation_params.findOne({"id" : 21}).eu_opinion >= 50;
+  	return simulation_params.findOne({"id" : 21}).eu_opinion >= 55;
   },
   'us_opinion_check' : function(){
-  	return simulation_params.findOne({"id" : 21}).us_opinion >= 50;
+  	return simulation_params.findOne({"id" : 21}).us_opinion >= 55;
   },
   'eu_sales_check' : function(){
   	return simulation_params.findOne({"id" : 21}).eu_share_perc >= 50;
   },
   'eu_cross_check' : function() {
-  	return simulation_params.findOne({"id" : 21}).eu_cross_check >= 15;
+  	return simulation_params.findOne({"id" : 21}).eu_cross_share_perc >= 15;
   },
   'us_sales_check' : function(){
+  	console.log(simulation_params.findOne({"id" : 21}).us_share_perc);
   	return simulation_params.findOne({"id" : 21}).us_share_perc >= 50;
   },
   'dev_check' : function(){
@@ -81,58 +85,65 @@ Template.main_display.events({
     // increment the counter when button is clicked
     changes = [];
     if(is_eu){
-	    for(var i = 1; i <= 4; i++){
-	 		console.log(i);
-	    	if(document.getElementById("action_" + i).checked){
-	    		var act = actions.findOne({"id" : i}).effects;
-	    		for(var k = 0; k < act.length; k++){
-	    			changes.push(act[k]);
-	    		}
-	    	}
-	    }
 	    oForm = document.forms[0];
-	    console.log();
 	    var option = [];
+	    var option_title = "None";
 	    var value = oForm.elements["option"].value;
+	    var t = simulation_params.findOne({"id" : 21}).turn;
 	    if(value == 1){
-	    	option = issues.findOne({"id" : 1}).options_eu.op_title1.effects;
+	    	option = issues.findOne({"id" : t}).options_eu.op_title1.effects;
+	    	option_title = issues.findOne({"id" : t}).options_eu.op_title1.title;
 	    } else if(value == 2){
-	    	option = issues.findOne({"id" : 1}).options_eu.op_title2.effects;
+	    	option = issues.findOne({"id" : t}).options_eu.op_title2.effects;
+	    	option_title = issues.findOne({"id" : t}).options_eu.op_title2.title;
 	    } else if(value == 3){
-	    	option = issues.findOne({"id" : 1}).options_eu.op_title2.effects;
+	    	option = issues.findOne({"id" : t}).options_eu.op_title3.effects;
+	    	option_title = issues.findOne({"id" : t}).options_eu.op_title3.title;
 	    }
-	    console.log(option);
 
 	    for(var k = 0; k < option.length; k++){
-	    	changes.push(option[k]);
-	    }  
-	} else {
-		for(var i = 5; i <= 8; i++){
-			console.log(i);
+	    	changes.push([option[k], [option_title, 0, true]] );
+	    }
+
+	    for(var i = 1; i <= 4; i++){
 	    	if(document.getElementById("action_" + i).checked){
-	    		var act = actions.findOne({"id" : i}).effects;
+	    		var act = actions.findOne({"id" : t}).effects;
 	    		for(var k = 0; k < act.length; k++){
-	    			changes.push(act[k]);
+	    			changes.push([act[k], [act.title, 1, true]]);
 	    		}
 	    	}
 	    }
+	    console.log("EU : " + changes);
+	} else {
 	    oForm = document.forms[0];
-	    console.log();
 	    var option = [];
+	    var option_title = "None";
 	    var value = oForm.elements["option"].value;
+	    var t = simulation_params.findOne({"id" : 21}).turn;
 	    console.log(value);
 	    if(value == 1){
-	    	option = issues.findOne({"id" : 1}).options_us.op_title1.effects;
+	    	option = issues.findOne({"id" : t}).options_us.op_title1.effects;
+	    	option_title = issues.findOne({"id" : t}).options_us.op_title1.title;
 	    } else if(value == 2){
-	    	option = issues.findOne({"id" : 1}).options_us.op_title2.effects;
+	    	option = issues.findOne({"id" : t}).options_us.op_title2.effects;
+	    	option_title = issues.findOne({"id" : t}).options_us.op_title2.title;
 	    } else if(value == 3){
-	    	option = issues.findOne({"id" : 1}).options_us.op_title2.effects;
+	    	option = issues.findOne({"id" : t}).options_us.op_title3.effects;
+	    	option_title = issues.findOne({"id" : t}).options_us.op_title3.title;
 	    }
-	    console.log(option);
 
 	    for(var k = 0; k < option.length; k++){
-	    	changes.push(option[k]);
+	    	changes.push([option[k], [option_title, 1, false]]);
 	    }  
+	    for(var i = 5; i <= 8; i++){
+	    	if(document.getElementById("action_" + i).checked){
+	    		var act = actions.findOne({"id" : i}).effects;
+	    		for(var k = 0; k < act.length; k++){
+	    			changes.push([act[k], [option_title, 2, false]]);
+	    		}
+	    	}
+	    }
+	    console.log("US : " + changes);
 	}
     
     $(".btn-group button").click(function () {
@@ -160,6 +171,8 @@ simulation_params.find().observeChanges({
     changed : function(){
     	if(is_in_main_display){
     		//BlazeLayout.render('contain', {main : 'main_display'});
+    		console.log(simulation_params.find({"id" : 21}).fetch());
+    		BlazeLayout.render('leaderboard', {is_eu : is_eu});
     		BlazeLayout.render('main_display', {is_eu : is_eu});
     	}
     }
@@ -203,6 +216,14 @@ FlowRouter.route('/home', {
 	name: 'european_home',
 	action(){
 		BlazeLayout.render('european_home');
+	}
+});
+
+//Leaderboard, to be used by sim runner
+FlowRouter.route('/leaderboard', {
+	name: "leaderboard",
+	action(){
+		BlazeLayout.render("leaderboard");
 	}
 });
 

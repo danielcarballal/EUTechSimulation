@@ -1,0 +1,30 @@
+<template name="leaderboard">
+	<body>
+	<div class="container" style="display: table">
+		<div class="row">
+			<table style="width:50%">
+				<caption class="title">
+	                  EU actions
+	            </caption>
+		            {{#each last_turn_eu}}
+					<tr style="color: red"><th>
+						<p> {{[1]}} </p>
+					</th></tr> 
+					{{/each}}
+			</table>
+		</div>
+		<div class="row">
+		<table style="width:50%">
+			<caption class="title">
+				US actions
+			</caption>
+			{{#each last_turn_us}}
+			<tr style="color: red"><th>
+				<p> {{[1]}} </p>
+			</th></tr> 
+			{{/each}}
+		</table>
+	</div>
+	</div>
+	</body>
+</template>

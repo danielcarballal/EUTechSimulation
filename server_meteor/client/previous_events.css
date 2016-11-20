@@ -1,0 +1,10 @@
+
+
+table {
+  font-family: arial, sans-serif;
+  width: 50%;
+  border: solid black 2px;
+}
+table tr {
+	border-bottom : solid black 1px;
+}

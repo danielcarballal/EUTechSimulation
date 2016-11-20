@@ -1,0 +1,35 @@
+
+The election of Prime Minister Hans Bjorkstrom Larson in Sweden has raised serious doubts about the use of social media in populist politics. Mr. Larson has a considerable online following, so much so that entire news websites are dedicated to Mr. Larson's politics. His opponents lament the fact that these sites get thousands of shares for every article. They say that these articles are often blatently false, such as the one which reported that opposition leader Sven Hendriksson was running an illegal surstromming operation from his home in Uppsala. They also claim that "Facebook and Twitter's algorithms give unneeded weight to articles that have already been shared, causing the problem we see today. When asked for a comment, Mr. Larson said "if Facebook and Twitter want to begin censoring news, of course they would start with me". His office says that social media giants should not be allowed to meddle in Swedish politics, and most polls of Swedes seem to agree. Should the EU Commission consider a case against Google and Facebook to limit the spread of these articles?
+
+US options
+Restrict articles
+	Silicon Valley has an obligation to ensure a constituency which is well-informed with sources that are trustworthy and factual.
+Effects
+	-3% Silicon Valley opinion
+
+Continue articles
+	Not allowing people to share articles from their favourite articles is a step short of censorship. In addition, there is no way to
+Effects
+	+4% Silican Valley opinion
+''
+EU options
+Provide Ultimatum
+	Tell Silicon Valley that they must restrict the sharing of articles from questionable sources. If Silicon Valley won't do it, then we will see people move to European platforms.
+Effects:
+	If Silicon Valley agrees:
+		+10% EU opinion 
+	Else:
+		-4% EU shares
+
+Sue Facebook
+	While we might not win a lawsuit, we can certainly hit Facebook's public image by making them have their day in court.
+Effects:
+	-5% US shares
+	-3% US opinion
+	-5% EU opinion
+
+Back Mr. Larson
+	Who are we to say what is a falacious article? What Facebook and Twitter are doing is not only legal, but completely democratic.
+Effects:
+	+6% opinion of EU
+	Donald J. Trump gets elected President of the United States

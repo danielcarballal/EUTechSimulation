@@ -1,0 +1,33 @@
+
+The EU Commission has had a case brought in front of it against the Silicon Valley startup called Scent. Scent is an app which allows users to have flowers sent to their home or office; anybody can sign up, and anybody can send flowers. The app has hundreds of thousands of downloads in every country, and has reduced flower sales of some countries, such as the Netherlands, by 20%. Many stories have emerged of Scent providers picking flowers from public gardens, country-side roads and, in one case, the EU Headquarters. Florist unions across the continent are in uproar over this app; according to a statement, \"Flowering is a difficult skill that takes years to learn; Scent requires no certificate of floristy excellence, and little training, making it dangerous for the public and the environment at large\". However, Scent refutes this saying that \"people know what their getting when they order a bouquet through Scent. Scent cannot possibly be responsible for every flower-picker in Europe\". How should the EU Commission rule on this matter? Should the Silicon Valley stand behind Scent, or vocalise opposition to their case in the European Courts?
+
+EU options
+Rule with Scent
+	If florist unions can't compete in the modern world, that's the way it goes. Scent itself is doing nothing illegal.
+Effects:
+	-4% EU Opinion
+	-2% EU Shares
+	+6% Total Development
+
+Rule against Scent
+	We can't allow thousands of people to suddenly be unemployed-- especially if there is no realistic alternative.
+Effects:
+	-5% US Shares
+	-2% Total Development
+
+US options:
+Disagree with European Commission
+	Publically say that the entire case against Scent is ridiculous
+Effects
+	-5% general opinion of EU
+
+Work with Unions
+	Offer to work with unions in retraining laid off workers in app development.
+Effects:
+	+10% EU shares
+	+2% general opinion of Silicon Valley.
+	
+Nothing
+	Silicon Valley has no particular stake in European politics, so we'll remain out of it.
+Effects
+	-2% general opinion of Silicon Valley

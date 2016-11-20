@@ -54,7 +54,7 @@
             <h2> Issue of the day </h2> 
           </div>
           <div class="row">
-            <p style="font-style: italic">{{issue.description}} </p>
+            <p style="font-style: italic; font-size:12px;">{{issue.description}} </p>
 
           </div>
         <form action="#n" name="theForm">
@@ -80,7 +80,6 @@
           </div>
         </div>
         <div class="col-md-3 ltblu tcell">
-          {{turn}}
           <div class="row">
             <div class="col-md-9 col-md-offset-1">
               <div id="piechart" style="width: 100%; height: 30%; border: 1px solid;"></div>
@@ -124,11 +123,11 @@
                 </tr>
                 <tr>
                   {{#if is_eu}}
-                  <th> 50% Opinion  </th>
+                  <th> 55% Opinion  </th>
                   <th class="status" id="opinion_status"> {{simparams.eu_opinion}}% </th>
                   <th id="opinion_glyph"> <div class="glyphicon {{#if eu_opinion_check}} {{ok}} {{else}} {{no}} {{/if}}"> </div></th>
                   {{else}}
-                  <th> 50% Opinion  </th>
+                  <th> 55% Opinion  </th>
                   <th class="status" id="opinion_status"> {{simparams.us_opinion}}% </th>
                   <th id="opinion_glyph"> <div class="glyphicon {{#if us_opinion_check}} {{ok}} {{else}} {{no}} {{/if}}"> </div></th>
                   {{/if}}
