@@ -6,11 +6,12 @@ var actions = new Mongo.Collection("actions");
 var simulation_params = new Mongo.Collection("simulation_params");
 var issues = new Mongo.Collection("issues");
 var changes = new Mongo.Collection("changes");
+var dialog = new Mongo.Collection("dialog");
 
 var is_eu = false;
+var name = "Charles";
 
 Template.leaderboard.helpers({
-
 	//Note the switch: We want last turn from the other team
 	'last_turn_eu': function(){
 		return simulation_params.findOne({"id" : 21})['last_turn_us'];
@@ -19,7 +20,6 @@ Template.leaderboard.helpers({
 		return simulation_params.findOne({"id" : 21})['last_turn_eu'];
 	},
 	'is_eu' : function(){
-		console.log(is_eu);
 		return is_eu;
 	}
 });
@@ -29,11 +29,9 @@ Template.main_display.helpers({
     return Template.instance().counter.get();
   },
   'eu_actions': function(){
-  		console.log("attempting eu issues");
   		return actions.find({"id" : {$lt : 5}} );
   	},
   	'us_actions': function(){
-  		console.log("attempting us issues");
   		return actions.find({"id" : {$gt : 4}} );
   },
   'issue' : function(){
@@ -45,6 +43,9 @@ Template.main_display.helpers({
   },
   'dev' : function(){
   	return simulation_params.findOne({"id" : 21}).development * 100;
+  },
+  'eu_cross' : function(){
+  	return simulation_params.findOne({"id" : 21}).eu_cross_share_perc;
   },
   'eu_opinion_check' : function(){
   	return simulation_params.findOne({"id" : 21}).eu_opinion >= 55;
@@ -59,7 +60,6 @@ Template.main_display.helpers({
   	return simulation_params.findOne({"id" : 21}).eu_cross_share_perc >= 15;
   },
   'us_sales_check' : function(){
-  	console.log(simulation_params.findOne({"id" : 21}).us_share_perc);
   	return simulation_params.findOne({"id" : 21}).us_share_perc >= 50;
   },
   'dev_check' : function(){
@@ -70,6 +70,9 @@ Template.main_display.helpers({
   }, 
   'no' : function() {
   	return "glyphicon-minus red";
+  },
+  'comment' : function(){
+  	return dialog.find({},{sort: {'num': -1}});
   }
 });
 
@@ -114,6 +117,7 @@ Template.main_display.events({
 	    	}
 	    }
 	    console.log("EU : " + changes);
+	    Meteor.call('add_dialog', "Team", "EU", "We made a decision for this turn");
 	} else {
 	    oForm = document.forms[0];
 	    var option = [];
@@ -144,29 +148,43 @@ Template.main_display.events({
 	    	}
 	    }
 	    console.log("US : " + changes);
+	    Meteor.call('add_dialog', "Team", "US", "We made a decision for this turn");
+		}
+	    
+	    $(".btn-group button").click(function () {
+	    	$("#buttonvalue").val($(this).text());
+		});
+	    Meteor.call('change_action', is_eu, changes);
+	},
+	'click .dialog'(event, instance){
+		var value = document.getElementById("dialog_box").value;
+		if(is_eu){
+			Meteor.call('add_dialog', name, "EU", value);
+		} else {
+			Meteor.call('add_dialog', name, "US", value);
+		}
+	},
+	'keypress .dialog_box'(instance){
+		console.log(event);
 	}
-    
-    $(".btn-group button").click(function () {
-    	$("#buttonvalue").val($(this).text());
-	});
-    Meteor.call('change_action', is_eu, changes);
-}
 });
 
 Template.european_home.events({
 	'click .us_click'(event, instance){
+		name = document.getElementById("name").value;
 		BlazeLayout.render('main_display', {is_eu : false});
 		is_in_main_display = true;
 	},
 	'click .eu_click'(event, instance){
+		name = document.getElementById("name").value;
 		BlazeLayout.render('main_display', {is_eu : true});
 		is_eu = true;
 		is_in_main_display = true;
 	}
-
 });
 
 var is_in_main_display = false;
+
 simulation_params.find().observeChanges({
     changed : function(){
     	if(is_in_main_display){
@@ -176,6 +194,15 @@ simulation_params.find().observeChanges({
     		BlazeLayout.render('main_display', {is_eu : is_eu});
     	}
     }
+});
+
+dialog.find().observeChanges({
+	insert :function(a,b){
+		console.log("Inserted");
+	},
+	changed : function(){
+		console.log("Changed");
+	}
 });
 
 Template.sim_goals.events({
@@ -234,34 +261,6 @@ FlowRouter.route('/', {
 		BlazeLayout.render('contain', {main : 'european_home'});
 	}
 });
-
-
-
-//Figure this out
-function google_chart(cross, us, eu){
-	google.charts.load('current', {'packages':['corechart']});
-	  google.charts.setOnLoadCallback(drawChart);
-	  function drawChart() {
-
-	    var data = google.visualization.arrayToDataTable([
-	      ['Task', 'Bn of Euros'],
-	      ['Cross-EU sales', cross],
-	      ['Domestic sales',  eu],
-	      ['Colour placeholder', 0],
-	      ['US sales',  us]
-	    ]);
-
-	    var options = {
-	      backgroundColor: '#83aff7',
-	      legend: 'position: none',
-	      title: 'European Tech Sector Breakdown'
-	    };
-
-	    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-	    chart.draw(data, options);
-		}
-}
 
 function update_chart(){
 	google_chart(simulation_params.findOne({"id" : 21}).domestic_share,

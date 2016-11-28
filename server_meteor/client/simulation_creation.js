@@ -4,5 +4,9 @@ import './styles/toggle.css';
 import './styles/bootstrap2.css';
 import './styles/jquery.js';
 
-// Work so that hovering is a bit more natural
+var num_players = 1;
+console.log("Loaded");
+function add_player(){
+	num_players += 1;
 
+}

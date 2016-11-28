@@ -26,6 +26,7 @@ if(Meteor.isServer)
   issues = new Mongo.Collection('issues');
   params = new Mongo.Collection('simulation_params');
   changes = new Mongo.Collection('changes');
+  dialog = new Mongo.Collection('dialog');
   var s = new Simulation();
   Meteor.startup(() => {
       var globalObject=Meteor.isClient?window:global;
@@ -43,6 +44,7 @@ if(Meteor.isServer)
   var store_changes = [];
   var first_entity = "";
   var turn_check = 0;
+  var dialog_num = 0;
   Meteor.methods({
       'change_action' : function(entity, changes){
           if(turn_check == 0){
@@ -51,13 +53,18 @@ if(Meteor.isServer)
               store_changes = changes;
               turn_check++;
           } else if(entity != first_entity) {
-              consoleturn_check.log("second");
+              console.log("second");
               s.next_turn(changes.concat(store_changes));
               turn_check = 0;
               store_changes = [];
           } else {
             console.log("Repeat");
           }
+      },
+      'add_dialog' : function(name, team, text){
+        dialog.insert({"num" : dialog_num, "user" : name, "team" : team, "val" : text});
+        dialog_num++;
+        console.log(dialog.find().fetch());
       }
   });
 
@@ -121,13 +128,17 @@ if(Meteor.isServer)
               "op_title2": {
                 "title": "Demand Reperations",
                 "effects": [
-                  ["condition", ["eu_opinion_shift", .05],
+                  ["condition", ["eu_development_add_change", .02],
                       ["eu_opinion_shift", .07],
                       ["eu_opinion_shift", -.03] ]
                 ]
               },
               "op_title3": {
-                "title": "None"
+                "title": "Force Repayments",
+                "effects" : [
+                  ["us_share", -.06],
+                  ["eu_opinion_shift", -.05]
+                ]
               }
             },
             "options_us": {
@@ -171,7 +182,7 @@ if(Meteor.isServer)
             ]
           },
           "op_title2": {
-            "title": "Allow Access",
+            "title": "Allow Euro Access",
             "effects": [
             [ "eu_opinion_shift", -.1],
              ["eu_cross_share", .02],
@@ -223,7 +234,7 @@ if(Meteor.isServer)
             ]
           },
           "op_title2": {
-            "title": "Allow Access",
+            "title": "Allow Tracking Info",
             "effects": [
               ["development_add", .02],
               ["eu_devopment_add_change" , -.02],
@@ -362,8 +373,8 @@ if(Meteor.isServer)
               "id" : 2,
               "title": "Enforce minor language software",
               "description": "It’s easy enough to find any software in English, and most have other languages like French and Spanish. But the EU should ensure that any software is available in minor languages, from Basque to Hungarian. Some software companies will be unhappy to have to comply.",
-              "effects": [ ["us_share", -.04], ["eu_share", -.04],
-              ["eu_cross_share", -.04],
+              "effects": [ ["development_add", -.04],
+                ["eu_cross_share", .15],
                 ["eu_opinion_shift", .02] ]
               
           });
@@ -527,8 +538,7 @@ if(Meteor.isServer)
                   var change_val = changes[i][0][1];
                   this.change_sim(change_type, change_val);
                   non_cond_changes.push(changes[i][0]);
-              }
-              //Add option
+                  //Add option
               if(changes[i][1][2] == true){
                 //Ensure each one is only added once
                 if(!this.change_added(this.last_turn_eu, changes[i]))
@@ -536,6 +546,7 @@ if(Meteor.isServer)
               } else {
                 if(!this.change_added(this.last_turn_us, changes[i]))
                   this.last_turn_us.push(changes[i]);
+              }
               }
 
           }
@@ -569,9 +580,13 @@ if(Meteor.isServer)
           this.eu_dev = this.eu_development / total_dev;
           this.us_share += total_growth * (1 - this.eu_dev) * this.us_company_opinion * 2;
           this.domestic_share += total_growth * this.eu_dev;
-          this.eu_cross_share += total_growth * this.eu_dev * this.eu_opinion / 3;
+          this.eu_cross_share += total_growth * this.eu_dev * this.eu_opinion;
 
           this.turn += 1;
+
+          if(this.turn == 7){
+            process.exit();
+          }
 
           initialise_params(this);
 

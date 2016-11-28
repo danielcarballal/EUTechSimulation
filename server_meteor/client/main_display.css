@@ -15,9 +15,6 @@
         background-color: #4286f4;
         padding-top: 15px;
       }
-      .ltyl > div {
-        padding: 15px;
-      }
       .button-cont {
         padding-top: 20px;
         
@@ -30,10 +27,6 @@
       }
       .green {
         color: green;
-      }
-      .action {
-        border-bottom: 1px solid;
-        padding-right: 15px;
       }
       .description {
         background-color: black;
@@ -98,4 +91,16 @@
 
       .small_text{
         font-size: 10px;
+      }
+
+      .titlerow {
+        padding-top: 0px;
+      }
+
+      .dialogue{
+           margin: 0 0 0px
+      }
+
+      .username {
+         font-weight: bold;
       }
