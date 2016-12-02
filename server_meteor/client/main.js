@@ -164,8 +164,17 @@ Template.main_display.events({
 			Meteor.call('add_dialog', name, "US", value);
 		}
 	},
-	'keypress .dialog_box'(instance){
-		console.log(event);
+	'keypress #dialog_box'(instance){
+		console.log(instance.originalEvent.key);
+		if (instance.originalEvent.key == "Enter"){
+			var value = $('#dialog_box').val();
+			$('#dialog_box').val('');
+			if(is_eu){
+				Meteor.call('add_dialog', name, "EU", value);
+			} else {
+				Meteor.call('add_dialog', name, "US", value);
+			}
+		}
 	}
 });
 
