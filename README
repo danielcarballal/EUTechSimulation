@@ -3,11 +3,11 @@ Setting up the simulation on your machine:
 2. Install meteor (https://www.meteor.com/install#!)
 3. Add the following packages to Meteor:
     arillo:flow-router-helpers  0.5.2  Template helpers for flow-router
-    autopublish                 1.0.7  (For prototyping only) Publish the entire database to ...
+    autopublish                 1.0.7  Publish the entire database to ...
     blaze-html-templates        1.0.5  Compile HTML templates into reactive UI with Meteor Blaze
     ecmascript                  0.6.0* Compiler plugin that supports ES2015+ in all .js files
     es5-shim                    4.6.15  Shims and polyfills to improve ECMAScript 5 support
-    insecure                    1.0.7  (For prototyping only) Allow all database writes from ...
+    insecure                    1.0.7  Allow all database writes from ...
     jquery                      1.11.10  Manipulate the DOM using CSS selectors
     kadira:blaze-layout         2.3.0  Layout Manager for Blaze (works well with FlowRouter)
     kadira:flow-router          2.12.1  Carefully Designed Client Side Router for Meteor
