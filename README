@@ -1,1 +1,33 @@
-A simulation planned for the European Horizons summit in Bruges in November 2016. Keep watching for updates on the project.
+Setting up the simulation on your machine:
+1. Download the codebase, navigate to the directory server_meteor
+2. Install meteor (https://www.meteor.com/install#!)
+3. Add the following packages to Meteor:
+    arillo:flow-router-helpers  0.5.2  Template helpers for flow-router
+    autopublish                 1.0.7  (For prototyping only) Publish the entire database to ...
+    blaze-html-templates        1.0.5  Compile HTML templates into reactive UI with Meteor Blaze
+    ecmascript                  0.6.0* Compiler plugin that supports ES2015+ in all .js files
+    es5-shim                    4.6.15  Shims and polyfills to improve ECMAScript 5 support
+    insecure                    1.0.7  (For prototyping only) Allow all database writes from ...
+    jquery                      1.11.10  Manipulate the DOM using CSS selectors
+    kadira:blaze-layout         2.3.0  Layout Manager for Blaze (works well with FlowRouter)
+    kadira:flow-router          2.12.1  Carefully Designed Client Side Router for Meteor
+    meteor-base                 1.0.4  Packages that every Meteor app needs
+    mizzao:bootstrap-3          3.3.1_1  HTML, CSS, and JS framework for developing responsiv...
+    mobile-experience           1.0.4  Packages for a great mobile user experience
+    mongo                       1.1.14  Adaptor for using MongoDB and Minimongo over DDP
+    reactive-var                1.0.11  Reactive variable
+    shell-server                0.2.1  Server-side component of the `meteor shell` command.
+    standard-minifier-css       1.3.2  Standard css minifier used with Meteor apps by default.
+    standard-minifier-js        1.2.1  Standard javascript minifiers used with Meteor apps by...
+    tracker                     1.1.1  Dependency tracker to allow reactive callbacks
+
+How to use this simulation:
+
+1. Get a group of friends or students, preferably together in the same room.
+2. Print out the simulation.pdf file.
+3. Split the group into two teams and assign one the European Commission and one Silicon Valley interests, and give them the instructions which pertain to them (7 pages each).
+4. Find your IP address, and have everyone with a laptop go to <your_ip_address>:3000.
+5. Have the participants put in their name and the group they are working with.
+6. Explain the simulation: Give a short entry about how relations between the EU and the US are rocky today, and how you want to explore percepectives of both sides. Explain how one of each team's goals is cooperative (technological development), one is competative (Sales), and one is independent (Opinion). Stress that the teams should try to hit as many goals as possible.
+7. Have the teams go through the 5 issues, giving the teams two to three minutes to debate and negiotiate. Let them read the corresponding page to each issue.
+8. Have fun! There's no right way to do this, but it can prove a useful tool for understanding EU/US relations
